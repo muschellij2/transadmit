@@ -207,6 +207,8 @@ read_summary_sophas = function(x) {
 
 #### WES/Foreign Transcripts ####
 reshape_grade_table = function(df) {
+  name_course = num_credits = NULL
+  rm(list = c("name_course", "num_credits"))
 
   cat_grade = text = x = y = space = group = colno = NULL
   rm(list = c("cat_grade", "text", "x", "y",
@@ -327,6 +329,13 @@ get_academic_history_wes = function(file) {
 read_wes = get_academic_history_wes
 
 
+#' Read Academic History
+#'
+#' @param file PDF file of the transcripts/application
+#'
+#' @return A `tbl` with information of the courses that were taken.
+#' A GPA summary is given by `attr(output, "summary")`
+#' @export
 read_academic_history = function(file) {
   if (length(file) > 1) {
     result = lapply(file, read_academic_history)

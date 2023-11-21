@@ -18,3 +18,5 @@ Imports:
     pdftools,
     stringr,
     tidyr
+Suggests: 
+    tesseract

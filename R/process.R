@@ -440,8 +440,8 @@ flag_courses = function(df) {
 
 
 subset_summary = function(summary) {
-  gpa_type = NULL
-  rm(list = c("gpa_type"))
+  gpa = gpa_type = NULL
+  rm(list = c("gpa_type", "gpa"))
 
   if (is.null(summary)) {
     return(NULL)
@@ -478,6 +478,12 @@ subset_summary = function(summary) {
   summary
 }
 
+#' Parse the academic history output
+#'
+#' @param df A `data.frame` from `read_academic_history`
+#'
+#' @return A list of checks and more subsetted data
+#' @export
 parse_academic_history = function(df) {
   name_course = course = NULL
   is_calculus = is_linear_algebra = is_adv_math = NULL
@@ -610,7 +616,14 @@ transform_parsed_gpa = function(out) {
   out
 }
 
-transformed_parsed_history = function(out) {
+#' Transform the parsed the academic history output into a `data.frame`
+#'
+#' @param out A `list` from `parse_academic_history`
+#'
+#' @return A single-row `data.frame` of the checks and passes.
+#' @export
+#'
+transform_parsed_history = function(out) {
   data = dplyr::as_tibble(
     out[c("data_parsed", "passes_prereq", "prereq_message",
           "passes_gpa_undergraduate", "passes_gpa_graduate")]
